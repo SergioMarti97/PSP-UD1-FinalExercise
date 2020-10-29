@@ -3,6 +3,10 @@ package summercampfx.utils;
 import summercampfx.model.Course;
 import summercampfx.model.PendingApp;
 
+import java.io.*;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +24,38 @@ public class FileUtils {
      * @return the applications for the courses
      */
     public static List<PendingApp> loadApps() {
-        return null;
+        ArrayList<PendingApp> pendingApps = new ArrayList<>();
+        try {
+            FileReader fr = new FileReader("C:\\Users\\Sergio\\IdeaProjects\\psp-ud1-finalexercise\\pendingApps.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            String line = br.readLine();
+            while ( line != null ) {
+
+                String[] info = line.split(";");
+                String[] date = info[2].split("/");
+
+                pendingApps.add(
+                        new PendingApp(
+                                info[0],
+                                info[1],
+                                LocalDate.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0])),
+                                info[3],
+                                Month.of(Integer.parseInt(info[4])),
+                                Integer.parseInt(info[5])
+                                )
+                );
+
+                line = br.readLine();
+
+            }
+
+        } catch ( FileNotFoundException e ) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pendingApps;
     }
 
     /**
@@ -28,7 +63,34 @@ public class FileUtils {
      * @return the courses of the summer camp
      */
     public static List<Course> loadCourses() {
-        return null;
+        ArrayList<Course> courses = new ArrayList<>();
+        try {
+            FileReader fr = new FileReader("C:\\Users\\Sergio\\IdeaProjects\\psp-ud1-finalexercise\\courses.txt");
+            BufferedReader br = new BufferedReader(fr);
+
+            String line = br.readLine();
+            while ( line != null ) {
+
+                String[] info = line.split(";");
+
+                courses.add(
+                        new Course(
+                                info[0],
+                                Integer.parseInt(info[1]),
+                                Integer.parseInt(info[2])
+                        )
+                );
+
+                line = br.readLine();
+
+            }
+
+        } catch ( FileNotFoundException e ) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return courses;
     }
 
     /**

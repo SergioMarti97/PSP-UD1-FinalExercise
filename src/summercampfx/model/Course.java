@@ -60,4 +60,8 @@ public class Course {
         this.weeksDuration = weeksDuration;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + month + " " + weeksDuration;
+    }
 }

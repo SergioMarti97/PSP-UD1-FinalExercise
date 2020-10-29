@@ -1,9 +1,10 @@
-module psp.ud1.finalexercise {
+module psp.ud.finalexercise {
+    //requires kotlin.stdlib;
+
     requires javafx.controls;
     requires javafx.fxml;
 
-    //exports healthymenu.model;
+    exports summercampfx.model;
 
-    //opens healthymenu;
-    //opens healthymenu.chartview;
+    opens summercampfx;
 }

@@ -109,4 +109,9 @@ public class PendingApp {
         this.weekDuration = weekDuration;
     }
 
+    @Override
+    public String toString() {
+        return name + " " + surnames + " " + birthdate + " " + course + " " + month + " " + weekDuration;
+    }
+
 }
